@@ -1,6 +1,6 @@
 @extends('backend.layout.index')
 
-@section('title', 'Restaurant Table Create |')
+@section('title', 'Restaurant Table Edit |')
 
 
 @push('admin_need_css')

@@ -1,6 +1,6 @@
 @extends('backend.layout.index')
 
-@section('title', 'Restaurant Foods |')
+@section('title', 'Restaurant Food Categories |')
 
 
 @push('admin_need_css')
@@ -19,9 +19,9 @@
         <div class="col-sm-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Total Restaurant Foods
+                    Total Restaurant Foods Categories
                     <span class="tools pull-right">
-                <a href="{{route('admin.restaurant.food.create')}}" class="fa fa-plus">Add New</a>
+                <a href="{{route('admin.restaurant.food.category.create')}}" class="fa fa-plus">Add New</a>
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                 <a href="javascript:;" class="fa fa-times"></a>
              </span>
@@ -32,43 +32,33 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Restaurant Food Category Name</th>
-                                <th>Food Name</th>
-                                <th>Food Qty</th>
-                                <th>Food Image</th>
+                                <th>Category Name</th>
+                                <th>Category Image</th>
                                 <th> Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($restaurant_foods as $key=>$restaurant_food)
+                            @foreach($restaurant_food_categories as $key=>$restaurant_food_category)
                                 <tr class="gradeX">
-
-                                    <?php
-                                    $restaurant_food_category_name = \App\Models\RestaurantFoodCategory::where('id',$restaurant_food->restaurant_food_category_id)->first();
-
-
-                                    ?>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$restaurant_food_category_name->restaurant_food_category_name}}</td>
-                                    <td>{{$restaurant_food->restaurant_food_name}}</td>
-                                    <td>{{$restaurant_food->restaurant_food_quantity}}</td>
-                                    <td><img class="float-end" height="100px" src="{{$restaurant_food->restaurant_food_image}}"></td>
+                                    <td>{{$restaurant_food_category->restaurant_food_category_name}}</td>
+                                    <td><img width="300px" height="270px" src="{{$restaurant_food_category->restaurant_food_category_image}}"></td>
                                     <td>
-                                        @if($restaurant_food->status == 1)
+                                        @if($restaurant_food_category->restaurant_food_category_status == 1)
                                             <a class="p-5"
-                                               href="{{route('admin.restaurant.food.status',$restaurant_food->id)}}"><i
+                                               href="{{route('admin.restaurant.food.category.status',$restaurant_food_category->id)}}"><i
                                                     class="fa fa-thumbs-up"></i> </a>
                                         @else
                                             <a class="p-5"
-                                               href="{{route('admin.restaurant.food.status',$restaurant_food->id)}}"><i
+                                               href="{{route('admin.restaurant.food.category.status',$restaurant_food_category->id)}}"><i
                                                     class="fa fa-thumbs-down"></i> </a>
 
                                         @endif
                                         <a class="p-5"
-                                           href="{{route('admin.restaurant.food.edit',$restaurant_food->id)}}"><i
+                                           href="{{route('admin.restaurant.food.category.edit',$restaurant_food_category->id)}}"><i
                                                 class="fa fa-edit"></i> </a>
                                         <a class="p-5"
-                                           href="{{route('admin.restaurant.food.delete',$restaurant_food->id)}}"><i
+                                           href="{{route('admin.restaurant.food.category.delete',$restaurant_food_category->id)}}"><i
                                                 class="fa fa-trash-o"></i> </a>
                                     </td>
                                 </tr>
@@ -78,9 +68,8 @@
                             <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Food Name</th>
-                                <th>Food Qty</th>
-                                <th>Food Image</th>
+                                <th>Category Name</th>
+                                <th>Category Image</th>
                                 <th> Action</th>
                             </tr>
                             </tfoot>

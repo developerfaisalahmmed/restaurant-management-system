@@ -1,11 +1,8 @@
 <ul class="list-group">
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
-    <a href="{{route('home.index')}}"><li class="list-group-item">Home</li></a>
+    @foreach($categories as $category)
+    <a href="{{route('category.items',$category->restaurant_food_category_name_slug)}}">
+        <li class="list-group-item">{{$category->restaurant_food_category_name}}</li>
+    </a>
+    @endforeach
+
 </ul>

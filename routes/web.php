@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Restaurant\RestaurantFoodCategoryController;
 use App\Http\Controllers\Restaurant\RestaurantFoodController;
 use App\Http\Controllers\Restaurant\RestaurantFoodOrderController;
 use App\Http\Controllers\Restaurant\RestaurantTableController;
@@ -72,6 +73,29 @@ Route::get('/restaurant/{id}/number/food/status', [RestaurantFoodController::cla
 
 
 
+
+// Restaurant Foods Categories Management
+Route::get('/restaurant/food/categories', [RestaurantFoodCategoryController::class, 'index'])->name('admin.restaurant.food.category');
+Route::get('/create/restaurant/food/category', [RestaurantFoodCategoryController::class, 'Admin_Restaurant_Food_Category_Create'])->name('admin.restaurant.food.category.create');
+Route::post('/save/restaurant/food/category', [RestaurantFoodCategoryController::class, 'Admin_Restaurant_Food_Category_Store'])->name('admin.restaurant.food.category.store');
+Route::get('/restaurant/{id}/number/food/category/edit', [RestaurantFoodCategoryController::class, 'Admin_Restaurant_Food_Category_Edit'])->name('admin.restaurant.food.category.edit');
+Route::post('/restaurant/{id}/number/food/category/update', [RestaurantFoodCategoryController::class, 'Admin_Restaurant_Food_Category_Update'])->name('admin.restaurant.food.category.update');
+Route::get('/restaurant/{id}/number/food/category/delete', [RestaurantFoodCategoryController::class, 'Admin_Restaurant_Food_Category_Delete'])->name('admin.restaurant.food.category.delete');
+Route::get('/restaurant/{id}/number/food/category/status', [RestaurantFoodCategoryController::class, 'Admin_Restaurant_Food_Category_Status'])->name('admin.restaurant.food.category.status');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Restaurant Foods Management
 Route::get('/restaurant/food/order', [RestaurantFoodOrderController::class, 'index'])->name('admin.restaurant.food.order');
 Route::get('/restaurant/food/{id}/number/order/details', [RestaurantFoodOrderController::class, 'Admin_Restaurant_Food_Order_Details'])->name('admin.restaurant.food.order.details');
@@ -92,3 +116,4 @@ Route::post('/cart/order', [CartController::class, 'cartOrder'])->name('cart.ord
 
 
 
+Route::get('/{category_name_slug}', [HomeController::class, 'Category_Items'])->name('category.items');

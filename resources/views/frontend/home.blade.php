@@ -40,12 +40,24 @@
 
 
     <div class="container pt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="bg-success p-2 "> Our Items</h2>
+        @foreach($restaurant_food_categories as $restaurant_food_category)
+        <div class="row  py-3">
+            <div class="col-md-12 d-flex justify-content-between bg-success">
+                <p class=" p-2 text-white"> <strong> <i>{{$restaurant_food_category->restaurant_food_category_name}}</i> </strong> </p>
+                <a class=" p-2 text-white" href="{{route('category.items',$restaurant_food_category->restaurant_food_category_name_slug)}}"> <strong> <i> More  {{$restaurant_food_category->restaurant_food_category_name}}</i> </strong> </a>
             </div>
         </div>
+
+        <?php
+
+            $restaurant_foods = DB::table('restaurant_food')->orderBy('id','DESC')->where('status','1')->where('restaurant_food_category_id',$restaurant_food_category->id)->limit(12)->get();
+
+
+            ?>
+{{--{{dd($restaurant_foods)}}--}}
         <div class="row">
+            @if($restaurant_foods->isNotEmpty())
+
             @foreach($restaurant_foods as $restaurant_food)
                 <div class="col-md-3">
                     <div class="card" >
@@ -79,10 +91,15 @@
                         </div>
                     </div>
                 </div>
-
-
-
             @endforeach
+            @else
+                <div class="col-md-12 m-2">
+                    <div class="alert alert-success" role="alert">
+                        <p class="text-center">Opss!! Sorry No Items in this section. </p>
+                    </div>
+                </div>
+            @endif
         </div>
+        @endforeach
     </div>
 @endsection

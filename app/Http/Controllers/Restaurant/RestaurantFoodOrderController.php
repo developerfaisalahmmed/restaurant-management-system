@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Restaurant;
 use App\Http\Controllers\Controller;
 use App\Models\FoodOrder;
 use App\Models\RestaurantTable;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,7 @@ class RestaurantFoodOrderController extends Controller
             ->join('restaurant_tables', 'restaurant_tables.restaurant_table_number', 'food_orders.food_table')
             ->orderBy('id','DESC')
             ->select('food_orders.*', 'restaurant_tables.restaurant_table_number', 'restaurant_tables.restaurant_table_name', 'restaurant_tables.restaurant_table_seat')
+            ->whereDate('food_orders.created_at', Carbon::today())
             ->get();
 
 

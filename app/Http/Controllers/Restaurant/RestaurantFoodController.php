@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Restaurant;
 
 use App\Http\Controllers\Controller;
 use App\Models\RestaurantFood;
+use App\Models\RestaurantFoodCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Validator;
@@ -17,7 +18,8 @@ class RestaurantFoodController extends Controller
 
     public function Admin_Restaurant_Food_Create()
     {
-        return view('backend.restaurant_food.create');
+        $restaurant_food_categories = RestaurantFoodCategory::where('restaurant_food_category_status',1)->get();
+        return view('backend.restaurant_food.create',compact('restaurant_food_categories'));
 
     }
 
@@ -29,6 +31,7 @@ class RestaurantFoodController extends Controller
         $validator = Validator::make($request->all(), [
             'restaurant_food_name' => 'required|unique:restaurant_food',
             'restaurant_food_quantity' => 'required',
+            'restaurant_food_category_id' => 'required',
             'restaurant_food_image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
 
         ]);
@@ -43,6 +46,7 @@ class RestaurantFoodController extends Controller
         } else {
 
             $restaurant_food = new RestaurantFood();
+            $restaurant_food->restaurant_food_category_id = $request->restaurant_food_category_id;
             $restaurant_food->restaurant_food_name = $request->restaurant_food_name;
             $restaurant_food->restaurant_food_quantity = $request->restaurant_food_quantity;
             $restaurant_food->restaurant_food_price = $request->restaurant_food_price;
@@ -66,7 +70,8 @@ class RestaurantFoodController extends Controller
 
     public function Admin_Restaurant_Food_Edit($id){
         $find_restaurant_food = RestaurantFood::findOrFail($id);
-        return view('backend.restaurant_food.edit',compact('find_restaurant_food'));
+        $restaurant_food_categories = RestaurantFoodCategory::where('restaurant_food_category_status',1)->get();
+        return view('backend.restaurant_food.edit',compact('find_restaurant_food','restaurant_food_categories'));
 
     }
 
@@ -90,6 +95,7 @@ class RestaurantFoodController extends Controller
         } else {
 
             $find_restaurant_food_update = RestaurantFood::findOrFail($id);
+            $find_restaurant_food_update->restaurant_food_category_id = $request->restaurant_food_category_id;
             $find_restaurant_food_update->restaurant_food_name = $request->restaurant_food_name;
             $find_restaurant_food_update->restaurant_food_quantity = $request->restaurant_food_quantity;
             $find_restaurant_food_update->restaurant_food_price = $request->restaurant_food_price;

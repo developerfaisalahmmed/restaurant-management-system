@@ -29,13 +29,26 @@
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-book"></i>
-                    <span>Restaurant Foods</span>
+                    <span>Foods Categories </span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{route('admin.restaurant.food')}}">Index</a></li>
+                    <li><a href="{{route('admin.restaurant.food.category')}}">Index</a></li>
                 </ul>
             </li>
-            <li class="sub-menu">
+
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Restaurant Foods</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{route('admin.restaurant.food')}}">Index</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-book"></i>
                     <span>Restaurant Order Foods</span>

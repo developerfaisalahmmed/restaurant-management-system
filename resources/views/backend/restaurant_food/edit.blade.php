@@ -1,6 +1,6 @@
 @extends('backend.layout.index')
 
-@section('title', 'Restaurant Food Create |')
+@section('title', 'Restaurant Food Edit |')
 
 
 @push('admin_need_css')
@@ -27,6 +27,18 @@
                     <form role="form" action="{{route('admin.restaurant.food.update',$find_restaurant_food->id)}}"
                           method="POST" enctype="multipart/form-data">
                         @csrf
+
+
+                        <div class="form-group">
+                            <label for="restaurant_food_name"> Restaurant Food Category Name</label>
+                            <select class="form-control" name="restaurant_food_category_id" aria-label="restaurant_food_category_id">
+                                @foreach($restaurant_food_categories as $restaurant_food_category)
+                                    <option @if($find_restaurant_food->restaurant_food_category_id == $restaurant_food_category->id) selected @endif value="{{$restaurant_food_category->id}}">{{$restaurant_food_category->restaurant_food_category_name}}</option>
+                                @endforeach
+                            </select>
+                            <div style='color:red; padding: 0 5px;'>{{($errors->has('restaurant_food_category_id'))?($errors->first('restaurant_food_category_id')):''}}</div>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="restaurant_food_name"> Restaurant Food Name</label>

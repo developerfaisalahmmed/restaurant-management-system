@@ -45,7 +45,13 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$restaurant_foods_order->food_table}}</td>
                                     <td>{{$restaurant_foods_order->food_payment_method}}</td>
-                                    <td>{{$restaurant_foods_order->status}}</td>
+                                    <td>
+                                        @if($restaurant_foods_order->status == 'pending')
+                                           <img width="300px" height="70px" src="{{asset('backend/img')}}/new-order.gif"/>
+                                        @else
+                                            Old Orders
+                                        @endif
+                                    </td>
                                     <td> {{ \Carbon\Carbon::parse($restaurant_foods_order->created_at)->diffForHumans() }}</td>
                                     <td>
                                         <a class="p-5"
@@ -86,4 +92,10 @@
             src="{{asset('backend')}}/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="{{asset('backend')}}/assets/data-tables/DT_bootstrap.js"></script>
     <script src="{{asset('backend')}}/js/dynamic_table_init.js"></script>
+
+    <script>
+        window.setTimeout( function() {
+            window.location.reload();
+        }, 30000);
+    </script>
 @endpush
